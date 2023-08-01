@@ -1,0 +1,60 @@
+***********************************************************************************
+
+Given an integer array nums, find a 
+subarray
+ that has the largest product, and return the product.
+
+The test cases are generated so that the answer will fit in a 32-bit integer.
+
+ 
+
+Example 1:
+
+Input: nums = [2,3,-2,4]
+Output: 6
+Explanation: [2,3] has the largest product 6.
+Example 2:
+
+Input: nums = [-2,0,-1]
+Output: 0
+Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
+
+
+***********************************************************************************
+
+class Solution {
+    public int maxProduct(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        /**
+       
+The for loop starts from index 1 and iterates through the array nums.
+Inside the loop, the current element at index i is considered.
+The temp variable is used to store the current value of maxProduct. This is necessary to avoid overwriting the value before using it in the next calculation.
+maxProduct is updated to hold the maximum of three values:
+The current element nums[i]
+The product of the current element and the maxProduct (to consider the possibility of extending the current maximum product subarray)
+The product of the current element and the minProduct (to consider the possibility of creating a new maximum product subarray starting from the current element, especially if the current element is negative).
+Similarly, minProduct is updated to hold the minimum of three values:
+The current element nums[i]
+The product of the current element and the temp (to consider the possibility of extending the current minimum product subarray)
+The product of the current element and the minProduct (to consider the possibility of creating a new minimum product subarray starting from the current element, especially if the current element is negative).
+After processing each element, the result is updated to hold the maximum of result and maxProduct. This ensures that we keep track of the largest product found so far as we iterate through the array.
+ */
+
+        int maxProduct = nums[0];
+        int minProduct = nums[0];
+        int result = nums[0];
+
+        for(int i=1;i<nums.length;i++){
+            int temp = maxProduct;
+            maxProduct = Math.max(nums[i], Math.max(nums[i]*maxProduct, nums[i]*minProduct));
+            minProduct = Math.min(nums[i], Math.min(nums[i]*temp, nums[i]*minProduct));
+            result = Math.max(result,maxProduct);
+        }
+
+        return result;
+    }
+}
