@@ -1,0 +1,39 @@
+https://leetcode.com/problems/longest-substring-without-repeating-characters/solutions/2133524/java-c-a-reall-detailed-explanation/
+
+
+To, find out a sliding window problem:-
+> First thing is, we have given something like an "Array" | OR | "String"
+> Second thing is, they are talking about either "subsequence" | OR | "substring"
+> And the third most thing is, either we have given a "window size i.e., k" | OR | we have to "manually find out window size" 
+
+ If your score lies from 2/3 to 3/3 that's a guarantee
+
+Template
+
+while(j < size()){
+
+    // Calculation's happen's here
+-----------------------------------------------
+    if(condition < k){
+        j++;
+    }
+-----------------------------------------------
+
+-----------------------------------------------
+    else if(condition == k){
+        // ans <-- calculation
+        j++;
+    }
+----------------------------------------------
+
+----------------------------------------------
+    else if(condition > k){
+        while(condition > k){
+            // remove calculation for i
+            i++;
+        }
+        j++;
+    }
+----------------------------------------------
+}
+return ans;
