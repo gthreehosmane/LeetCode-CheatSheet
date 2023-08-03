@@ -1,0 +1,46 @@
+Given an array nums of size n, return the majority element.
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+Example 1:
+
+Input: nums = [3,2,3]
+Output: 3
+Example 2:
+
+Input: nums = [2,2,1,1,1,2,2]
+Output: 2
+
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        /*Arrays.sort(nums);
+        return nums[(nums.length-1)/2];*/
+        /**
+        
+        Sort the array.
+        If an element is present more than n/2 times, that element must be present in the mid index
+        of the array when sorted.
+
+         */
+
+         /**
+         can also use a map to store the counts.
+
+          */
+          /**
+          voting algorithm
+
+           */
+        int count = 0;
+        int candidate = 0;
+        for(int i:nums){
+            if(count == 0)
+            candidate = i;
+            if(i == candidate)
+            count++;
+            else
+            count--;
+        }
+        return candidate;
+    }
+}
