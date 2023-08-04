@@ -1,0 +1,44 @@
+Given an array of integers citations where citations[i] is the number of citations a researcher received for their ith paper, return the researcher's h-index.
+
+According to the definition of h-index on Wikipedia: The h-index is defined as the maximum value of h such that the given researcher has published at least h papers that have each been cited at least h times.
+
+ Example 1:
+
+Input: citations = [3,0,6,1,5]
+Output: 3
+Explanation: [3,0,6,1,5] means the researcher has 5 papers in total and each of them had received 3, 0, 6, 1, 5 citations respectively.
+Since the researcher has 3 papers with at least 3 citations each and the remaining two with no more than 3 citations each, their h-index is 3.
+Example 2:
+
+Input: citations = [1,3,1]
+Output: 1
+
+*************************************************************************
+
+class Solution {
+    public int hIndex(int[] citations) {
+        int n = citations.length;
+        int[] count = new int[n+1];
+        /**
+        
+        Create an array to hold the paper ciations
+        add papers into buckets based on ciations.
+        Like buket 1 will have papers with atleast 1 citation and so on
+
+        After counting the citations, we iterate from n down to 0 and calculate the cumulative total of papers with at least i citations. When the cumulative total becomes greater than or equal to i, we've found the h-index, and we return i.
+         */
+        for(int i:citations){
+            if(i>=n)
+            count[n]++;
+            else
+            count[i]++;
+        }
+        int total = 0;
+        for(int i=n;i>=0;i--){
+            total+=count[i];
+            if(total>=i)
+            return i;
+        }
+        return 0;
+    }
+}
