@@ -1,0 +1,80 @@
+Given two strings s and t, determine if they are isomorphic.
+
+Two strings s and t are isomorphic if the characters in s can be replaced to get t.
+
+All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.
+
+ Example 1:
+
+Input: s = "egg", t = "add"
+Output: true
+Example 2:
+
+Input: s = "foo", t = "bar"
+Output: false
+Example 3:
+
+Input: s = "paper", t = "title"
+Output: true
+
+*************************************************************************************************************************************
+
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+
+        /**
+        Approach 1
+        Create a map
+        At each index put the character of s as key and character of t as value, if the key is not present already. If the key is present with a different value than t, return flase.
+
+        if the map already has a key, and value as character in t, continue checking.
+
+         */
+        /*HashMap<Character,Character> mp = new HashMap<>();
+        if(s.length() != t.length())
+            return false;
+        for(int i=0;i<s.length();i++){
+
+            char a = s.charAt(i);
+            char b = t.charAt(i);
+
+            if(mp.containsKey(a)){
+                if(mp.get(a) == b)
+                    continue;
+                return false;
+            }
+            else{
+                if(!mp.containsValue(b))
+                    mp.put(a,b);
+                else
+                return false;
+            }
+            
+        }
+        return true;*/
+        if(s.length() != t.length()){
+            return false;
+        }
+        return transform(s).equals(transform(t));
+    }
+    /**approach 2
+    Create a integer string from both s and t character index values.
+    if the integer strings for s and t are same, return true;
+    
+    
+     */
+    public String transform(String s){
+        HashMap<Character,Integer> mp = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<s.length();i++){
+            char a = s.charAt(i);
+            if(!mp.containsKey(a)){
+                mp.put(a,i);
+            }
+        sb.append(Integer.toString(mp.get(a)));
+        sb.append(" ");
+    }
+    return sb.toString();
+  }
+}
+    
